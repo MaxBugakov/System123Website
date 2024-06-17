@@ -7,7 +7,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
 </head>
 <body>
-    <div class="spinner"></div>
+    <div class="spinner">
+        <div class="text" id="text1">Виджет на сайт</div>
+        <div class="text" id="text2">Виртуальный шоурум</div>
+        <div class="text" id="text3">Фото/видео студия</div>
+    </div>
 
     <style>
         body {
@@ -29,11 +33,38 @@
             background-repeat: no-repeat;
             border-radius: 100%;
             position: relative;
+            /* background-color: red; */
+        }
+
+        .text {
+            position: absolute;
+            transform-origin: center center;
+            font-size: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+            color: aqua;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #text1 {
+            top: 14px;
+            left: -132px;
+        }
+
+        #text2 {
+            top: 1px;
+            left: 274px;
+        }
+
+        #text3 {
+            top: 391px;
+            left: 47px;
         }
     </style>
 
     <script>
         const spinner = document.querySelector('.spinner');
+        const texts = document.querySelectorAll('.text');
         let rotation = 0;
         let lastAngle = 0;
         let velocity = 0;
@@ -51,6 +82,9 @@
                     rotation += delta;
                     velocity = delta;
                     spinner.style.transform = `rotate(${rotation}deg)`;
+                    texts.forEach(text => {
+                        text.style.transform = `rotate(${-rotation}deg)`;
+                    });
                     lastAngle = angle;
                 },
                 onend(event) {
@@ -69,6 +103,9 @@
             rotation += velocity;
             velocity *= friction;
             spinner.style.transform = `rotate(${rotation}deg)`;
+            texts.forEach(text => {
+                text.style.transform = `rotate(${-rotation}deg)`;
+            });
             if (Math.abs(velocity) > 0.1) {
                 requestAnimationFrame(spin);
             }
