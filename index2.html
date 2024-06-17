@@ -174,7 +174,7 @@
             texts.forEach(text => {
                 text.style.transform = `rotate(${-rotation}deg)`;
             });
-            if (Math.abs(velocity) > 0.05) {
+            if (Math.abs(velocity) > 0.1) {
                 requestAnimationFrame(spin);
             }
         }
