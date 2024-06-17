@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Spinner with Inertia</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
+</head>
+<body>
+    <div class="spinner"></div>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .spinner {
+            width: 400px;
+            height: 400px;
+            background-image: url(spinner_img.png);
+            background-position: bottom 10px right 20px;
+            background-size: 90%;
+            background-repeat: no-repeat;
+            background-color: red;
+            border-radius: 100%;
+            position: relative;
+        }
+    </style>
+
+    <script>
+        const spinner = document.querySelector('.spinner');
+        let rotation = 0;
+        let lastAngle = 0;
+        let velocity = 0;
+        let friction = 0.98; // Friction coefficient to slow down the spin
+
+        interact('.spinner')
+            .draggable({
+                onstart(event) {
+                    lastAngle = getAngle(event.pageX, event.pageY);
+                    velocity = 0;
+                },
+                onmove(event) {
+                    const angle = getAngle(event.pageX, event.pageY);
+                    const delta = angle - lastAngle;
+                    rotation += delta;
+                    velocity = delta;
+                    spinner.style.transform = `rotate(${rotation}deg)`;
+                    lastAngle = angle;
+                },
+                onend(event) {
+                    spin();
+                }
+            });
+
+        function getAngle(x, y) {
+            const rect = spinner.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+        }
+
+        function spin() {
+            rotation += velocity;
+            velocity *= friction;
+            spinner.style.transform = `rotate(${rotation}deg)`;
+            if (Math.abs(velocity) > 0.1) {
+                requestAnimationFrame(spin);
+            }
+        }
+    </script>
+</body>
+</html>
