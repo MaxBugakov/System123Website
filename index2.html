@@ -17,11 +17,11 @@
         <a href="index1.html">1</a>
         <a href="" id="page-in">2</a>
     </div>
-    <div class="title title-top"><h2>Виртуальные инструменты продаж1</h2></div>
+    <div class="title title-top"><h2>Виртуальные инструменты продаж</h2></div>
     <div class="spinner">
-        <div class="text" id="text1">Виджет на сайт</div>
-        <div class="text" id="text2">Виртуальный шоурум</div>
-        <div class="text" id="text3">Фото/видео студия</div>
+        <div class="text" id="text1">Виджет <br> на сайт</div>
+        <div class="text" id="text2">Виртуальный <br> шоурум</div>
+        <div class="text" id="text3">Фото/видео <br> студия</div>
     </div>
     <div class="title title-bottom"><h2>Выбери свой</h2></div>
 
@@ -113,21 +113,22 @@
             color: rgb(0, 0, 0);
             font-family: 'Montserrat', sans-serif;
             user-select: none; 
+            text-align: center;
         }
 
         #text1 {
-            top: -44px;
-            left: 65px;
+            top: -67px;
+            left: 106px;
         }
 
         #text2 {
-            top: 227px;
-            left: 187px;
+            top: 221px;
+            left: 247px;
         }
 
         #text3 {
-            top: 232px;
-            left: -108px;
+            top: 219px;
+            left: -88px;
         }
     </style>
 
@@ -137,7 +138,7 @@ const texts = document.querySelectorAll('.text');
 let rotation = 0;
 let lastAngle = 0;
 let velocity = 0;
-let friction = 0.985; // Friction coefficient to slow down the spin
+let friction = 0.99; // Friction coefficient to slow down the spin
 let isDragging = false;
 let isClicked = false;
 let startClick = false;
@@ -168,12 +169,12 @@ interact('.spinner')
         }
     });
 
-spinner.addEventListener('click', () => {
-    if (!isDragging && isClicked) {
-        velocity = 0;
-    }
-    isClicked = !isClicked;
-});
+// spinner.addEventListener('click', () => {
+//     if (!isDragging && isClicked) {
+//         velocity = 0;
+//     }
+//     isClicked = !isClicked;
+// });
 
 
 // spinner.addEventListener('mousedown', (event) => {
@@ -187,18 +188,12 @@ spinner.addEventListener('click', () => {
 
 // spinner.addEventListener('mouseup', (event) => {
 //     if (startClick) {
-//         // console.log(Math.abs(startPositionX - event.clientX) <= 5);
-//         // console.log(Math.abs(startPositionY - event.clientY) <= 5);
-//         alert(startPositionX + " - " + event.clientX);
-//         alert(startPositionY + " - " + event.clientY);
 //         if (Math.abs(startPositionX - event.clientX) <= 30 && Math.abs(startPositionY - event.clientY) <= 30) {
 //             velocity = 0;
-//             console.log("yes");
 //         }
         
 //     }
 //     startClick = false;
-//     isClicked = !isClicked;
 // });
 
 function getAngle(x, y) {
@@ -215,7 +210,7 @@ function spin() {
     texts.forEach(text => {
         text.style.transform = `rotate(${-rotation}deg)`;
     });
-    if (Math.abs(velocity) > 0.2) {
+    if (Math.abs(velocity) > 0.05) {
         requestAnimationFrame(spin);
     }
 }
