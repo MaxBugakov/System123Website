@@ -140,7 +140,8 @@ let friction = 0.985; // Friction coefficient to slow down the spin
 let isDragging = false;
 let isClicked = false;
 let startClick = false;
-let startPosition = 0;
+let startPositionX = 0;
+let startPositionY = 0;
 
 interact('.spinner')
     .draggable({
@@ -177,15 +178,17 @@ interact('.spinner')
 spinner.addEventListener('mousedown', (event) => {
     if (!isDragging && isClicked) {
         startClick = true;
-        startPosition = event.clientX;
+        startPositionX = event.clientX;
+        startPositionY = event.clientY;
     }
     
 });
 
 spinner.addEventListener('mouseup', (event) => {
     if (startClick) {
-        
-        if (startPosition == event.clientX) {
+        // console.log(Math.abs(startPositionX - event.clientX) <= 5);
+        // console.log(Math.abs(startPositionY - event.clientY) <= 5);
+        if (Math.abs(startPositionX - event.clientX) <= 5 && Math.abs(startPositionY - event.clientY) <= 5) {
             velocity = 0;
             console.log("yes");
         }
