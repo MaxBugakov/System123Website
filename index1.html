@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Spinner with Inertia</title>
+    <title>Interactive Spinner with Inertia 1</title>
 
     <!-- Шрифты. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,6 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
 </head>
 <body>
+    <div class="page-setter">
+        <a href="" id="page-in">1</a>
+        <a href="index2.html">2</a>
+    </div>
     <div class="title title-top"><h2>Виртуальные инструменты продаж</h2></div>
     <div class="spinner">
         <div class="text" id="text1">Виджет на сайт</div>
@@ -36,6 +40,29 @@
             flex-direction: column;
             position: relative;
         }
+        .page-setter {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+        }
+        .page-setter a {
+            font-size: 20px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            font-family: 'Montserrat', sans-serif;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 10px;
+            color: white;
+            margin: 0px 5px;
+            color: #12D8FA;
+        }
+
+        #page-in {
+            background: rgb(154,158,201);
+            background: linear-gradient(90deg, #1FA2FF 0%, #12D8FA 50%, #A6FFCB 100%);
+            color: white;
+        }
 
         .title {
             font-size: 20px;
@@ -46,13 +73,15 @@
         }
         .title h2 {
             font-weight: 700;
+            padding: 0;
+            margin: 0;
         }
         .title-top { 
             background: #121FCF;
             background: linear-gradient(to right, #1FA2FF 0%, #12D8FA 50%, #A6FFCB 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            top: 20px;
+            top: 60px;
             text-align: center;
         }
         .title-bottom {
