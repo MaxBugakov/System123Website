@@ -169,6 +169,21 @@ interact('.spinner')
         }
     });
 
+
+    let touchStartTime = 0;
+        const tapThreshold = 200; // Threshold in milliseconds for a quick touch
+
+        tracker.addEventListener('touchstart', () => {
+            touchStartTime = Date.now();
+        });
+
+        tracker.addEventListener('touchend', () => {
+            const touchDuration = Date.now() - touchStartTime;
+            if (touchDuration < tapThreshold) {
+                alert("Quick touch detected!")
+            }
+        });
+
 // spinner.addEventListener('click', () => {
 //     if (!isDragging && isClicked) {
 //         velocity = 0;
