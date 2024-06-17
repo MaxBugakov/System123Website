@@ -192,6 +192,8 @@ spinner.addEventListener('mouseup', (event) => {
         if (Math.abs(startPositionX - event.clientX) <= 30 && Math.abs(startPositionY - event.clientY) <= 30) {
             velocity = 0;
             console.log("yes");
+            alert(startPositionX + " - " + event.clientX);
+            alert(startPositionY + " - " + event.clientY);
         }
         
     }
