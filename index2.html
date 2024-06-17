@@ -131,53 +131,89 @@
     </style>
 
     <script>
-        const spinner = document.querySelector('.spinner');
-        const texts = document.querySelectorAll('.text');
-        let rotation = 0;
-        let lastAngle = 0;
-        let velocity = 0;
-        let friction = 0.994; // Friction coefficient to slow down the spin
+      const spinner = document.querySelector('.spinner');
+const texts = document.querySelectorAll('.text');
+let rotation = 0;
+let lastAngle = 0;
+let velocity = 0;
+let friction = 0.985; // Friction coefficient to slow down the spin
+let isDragging = false;
+let isClicked = false;
+let startClick = false;
+let startPosition = 0;
 
-        interact('.spinner')
-            .draggable({
-                onstart(event) {
-                    lastAngle = getAngle(event.pageX, event.pageY);
-                    velocity = 0;
-                },
-                onmove(event) {
-                    const angle = getAngle(event.pageX, event.pageY);
-                    const delta = angle - lastAngle;
-                    rotation += delta;
-                    velocity = delta;
-                    spinner.style.transform = `rotate(${rotation}deg)`;
-                    texts.forEach(text => {
-                        text.style.transform = `rotate(${-rotation}deg)`;
-                    });
-                    lastAngle = angle;
-                },
-                onend(event) {
-                    spin();
-                }
-            });
-
-        function getAngle(x, y) {
-            const rect = spinner.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
-        }
-
-        function spin() {
-            rotation += velocity;
-            velocity *= friction;
+interact('.spinner')
+    .draggable({
+        onstart(event) {
+            lastAngle = getAngle(event.pageX, event.pageY);
+            velocity = 0;
+            isDragging = true;
+        },
+        onmove(event) {
+            const angle = getAngle(event.pageX, event.pageY);
+            const delta = angle - lastAngle;
+            rotation += delta;
+            velocity = delta;
             spinner.style.transform = `rotate(${rotation}deg)`;
             texts.forEach(text => {
                 text.style.transform = `rotate(${-rotation}deg)`;
             });
-            if (Math.abs(velocity) > 0.1) {
-                requestAnimationFrame(spin);
-            }
+            lastAngle = angle;
+        },
+        onend(event) {
+            isDragging = false;
+            spin();
         }
+    });
+
+// spinner.addEventListener('click', () => {
+//     if (!isDragging && isClicked) {
+//         velocity = 0;
+//     }
+//     isClicked = !isClicked;
+// });
+
+
+spinner.addEventListener('mousedown', (event) => {
+    if (!isDragging && isClicked) {
+        startClick = true;
+        startPosition = event.clientX;
+    }
+    
+});
+
+spinner.addEventListener('mouseup', (event) => {
+    if (startClick) {
+        
+        if (startPosition == event.clientX) {
+            velocity = 0;
+            console.log("yes");
+        }
+        
+    }
+    startClick = false;
+    isClicked = !isClicked;
+});
+
+function getAngle(x, y) {
+    const rect = spinner.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+}
+
+function spin() {
+    rotation += velocity;
+    velocity *= friction;
+    spinner.style.transform = `rotate(${rotation}deg)`;
+    texts.forEach(text => {
+        text.style.transform = `rotate(${-rotation}deg)`;
+    });
+    if (Math.abs(velocity) > 0.2) {
+        requestAnimationFrame(spin);
+    }
+}
+
     </script>
 </body>
 </html>
