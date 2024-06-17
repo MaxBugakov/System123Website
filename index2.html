@@ -189,11 +189,11 @@ spinner.addEventListener('mouseup', (event) => {
     if (startClick) {
         // console.log(Math.abs(startPositionX - event.clientX) <= 5);
         // console.log(Math.abs(startPositionY - event.clientY) <= 5);
+        alert(startPositionX + " - " + event.clientX);
+        alert(startPositionY + " - " + event.clientY);
         if (Math.abs(startPositionX - event.clientX) <= 30 && Math.abs(startPositionY - event.clientY) <= 30) {
             velocity = 0;
             console.log("yes");
-            alert(startPositionX + " - " + event.clientX);
-            alert(startPositionY + " - " + event.clientY);
         }
         
     }
