@@ -140,7 +140,7 @@ let lastAngle = 0;
 let velocity = 0;
 let friction = 0.99; // Friction coefficient to slow down the spin
 let isDragging = false;
-let isClicked = false;
+let isClicked = true;
 let startClick = false;
 let startPositionX = 0;
 let startPositionY = 0;
@@ -175,21 +175,33 @@ interact('.spinner')
         const slideThresholdDistance = 30;
         let touchStartX = 0;
         let touchStartY = 0;
+        let wasTrueTouch = false;
 
         spinner.addEventListener('touchstart', (event) => {
-            touchStartTime = Date.now();
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
+            if (!isDragging && isClicked) {
+                touchStartTime = Date.now();
+                touchStartX = event.touches[0].clientX;
+                touchStartY = event.touches[0].clientY;
+                wasTrueTouch = true;
+            }
+            // if (!isClicked) {
+            //     isClicked = true;
+            // }
+            // isClicked = !isClicked;
         });
 
         spinner.addEventListener('touchend', (event) => {
-            const touchDuration = Date.now() - touchStartTime;
-            const distanceX = event.changedTouches[0].clientX - touchStartX;
-            const distanceY = event.changedTouches[0].clientY - touchStartY;
-            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-            if (touchDuration < tapThresholdTime && distance < slideThresholdDistance)  {
-                alert("Quick touch detected!")
+            if (wasTrueTouch) {
+                const touchDuration = Date.now() - touchStartTime;
+                const distanceX = event.changedTouches[0].clientX - touchStartX;
+                const distanceY = event.changedTouches[0].clientY - touchStartY;
+                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                if (touchDuration < tapThresholdTime && distance < slideThresholdDistance)  {
+                    velocity = 0;
+                }
             }
+            wasTrueTouch = false;
+            
         });
 
 // spinner.addEventListener('click', () => {
