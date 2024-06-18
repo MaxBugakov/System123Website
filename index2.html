@@ -17,7 +17,7 @@
         <a href="index1.html">1</a>
         <a href="" id="page-in">2</a>
     </div>
-    <div class="title title-top"><h2>Виртуальные инструменты продаж</h2></div>
+    <div class="title title-top"><h2>Виртуальные инструменты продаж1</h2></div>
     <div class="spinner">
         <div class="text" id="text1">Виджет <br> на сайт</div>
         <div class="text" id="text2">Виртуальный <br> шоурум</div>
@@ -170,16 +170,24 @@ interact('.spinner')
     });
 
 
-    let touchStartTime = 0;
-        const tapThreshold = 200; // Threshold in milliseconds for a quick touch
+        let touchStartTime = 0;
+        const tapThresholdTime = 200; // Threshold in milliseconds for a quick touch
+        const slideThresholdDistance = 30;
+        let touchStartX = 0;
+        let touchStartY = 0;
 
-        tracker.addEventListener('touchstart', () => {
+        spinner.addEventListener('touchstart', (event) => {
             touchStartTime = Date.now();
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
         });
 
-        tracker.addEventListener('touchend', () => {
+        spinner.addEventListener('touchend', (event) => {
             const touchDuration = Date.now() - touchStartTime;
-            if (touchDuration < tapThreshold) {
+            const distanceX = event.changedTouches[0].clientX - touchStartX;
+            const distanceY = event.changedTouches[0].clientY - touchStartY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+            if (touchDuration < tapThresholdTime && distance < slideThresholdDistance)  {
                 alert("Quick touch detected!")
             }
         });
