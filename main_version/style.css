@@ -1,12 +1,15 @@
-html {
+html, body {
     overflow: hidden;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
     background-color: #f5f5f5;
     overflow: hidden;
     flex-direction: column;
@@ -14,42 +17,31 @@ body {
 }
 
 .main-wrapper {
-    background-color: red;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 20px 0;
+    background-color: red;
 }
-
 
 .title {
     font-size: 20px;
     color: rgb(0, 0, 0);
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    /* position: absolute; */
 }
 .title h2 {
     font-weight: 700;
     padding: 0;
     margin: 0;
 }
-.title-top { 
-    background: #121FCF;
+.title-top, .title-bottom {
     background: linear-gradient(to right, #1FA2FF 0%, #12D8FA 50%, #A6FFCB 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    top: 20px;
     text-align: center;
-    margin-bottom: 80px;
-}
-.title-bottom {
-    background: #121FCF;
-    background: linear-gradient(to right, #1FA2FF 0%, #12D8FA 50%, #A6FFCB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    bottom: 80px;
-    text-align: center;
-    margin-top: 80px;
 }
 
 .spinner {
@@ -90,10 +82,7 @@ body {
     left: -88px;
 }
 
-#product1-number {
-    top: 10px;
-    left: 104px;
-    /* background-color: rgba(255, 0, 0, 0.37); */
+#product1-number, #product2-number, #product3-number {
     width: 90px;
     height: 90px;
     display: flex;
@@ -102,48 +91,34 @@ body {
     text-decoration: none;
     border-radius: 50%;
 }
+
+#product1-number {
+    top: 10px;
+    left: 104px;
+}
+
 #product2-number {
     top: 150px;
     left: 186px;
-    /* background-color: rgba(255, 0, 0, 0.37); */
-    width: 90px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 50%;
 }
 
 #product3-number {
     top: 151px;
     left: 24px;
-    /* background-color: rgba(255, 0, 0, 0.37); */
-    width: 90px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 50%;
-    
 }
-
 
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Edge, Opera and Firefox */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 .var-logo {
     width: 60px;
     height: 20px;
-    /* background-color: red; */
     position: absolute;
     top: 140px;
     left: 120px;
