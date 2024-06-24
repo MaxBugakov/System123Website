@@ -3,7 +3,7 @@ $(document).ready(function() {
     const $texts = $('.text');
     let rotation = 0;
     let lastAngle = 0;
-    let velocity = 0;
+    let velocity = 3.5;
     let friction = 0.99; // Коэффициент трения для замедления движения спинера.
     let isDragging = false;
 
@@ -47,6 +47,7 @@ $(document).ready(function() {
             requestAnimationFrame(spin);
         }
     }
+    spin();
 
 
     // Остановка кручение на нажатие.
@@ -75,9 +76,6 @@ $(document).ready(function() {
                 const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
                 if (touchDuration < tapThresholdTime && distance < slideThresholdDistance) {
                     velocity = 0;
-                    var width = window.innerWidth;
-                    var height = window.innerHeight;
-                    alert("Viewport Width: " + width + "px\nViewport Height: " + height + "px");
                 }
             }
             wasTrueTouch = false;
@@ -109,18 +107,4 @@ $(document).ready(function() {
             wasTrueClick = false;
         });
     }
-
-     // Функция для получения размеров вьюпорта
-     function getViewportDimensions() {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        alert("Viewport Width: " + width + "px\nViewport Height: " + height + "px");
-    }
-
-    // Вызов функции при загрузке страницы
-    window.onload = getViewportDimensions;
-
-    // Добавление обработчика для события изменения размера окна
-    window.onresize = getViewportDimensions;
-    
 });
