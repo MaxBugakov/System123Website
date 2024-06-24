@@ -108,12 +108,12 @@ body {
 }
 
 .noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
 }
 
 .var-logo {
@@ -126,4 +126,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+}
+.footer__phone {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 40px;
+    text-align: center;
+}
+.footer__phone a {
+    text-decoration: none;
+    color: #e224cc;
+    white-space: nowrap;
 }
