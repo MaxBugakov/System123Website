@@ -75,6 +75,9 @@ $(document).ready(function() {
                 const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
                 if (touchDuration < tapThresholdTime && distance < slideThresholdDistance) {
                     velocity = 0;
+                    var width = window.innerWidth;
+                    var height = window.innerHeight;
+                    alert("Viewport Width: " + width + "px\nViewport Height: " + height + "px");
                 }
             }
             wasTrueTouch = false;
