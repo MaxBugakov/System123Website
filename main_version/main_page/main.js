@@ -109,4 +109,18 @@ $(document).ready(function() {
             wasTrueClick = false;
         });
     }
+
+     // Функция для получения размеров вьюпорта
+     function getViewportDimensions() {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        alert("Viewport Width: " + width + "px\nViewport Height: " + height + "px");
+    }
+
+    // Вызов функции при загрузке страницы
+    window.onload = getViewportDimensions;
+
+    // Добавление обработчика для события изменения размера окна
+    window.onresize = getViewportDimensions;
+    
 });
