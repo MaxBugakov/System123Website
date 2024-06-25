@@ -80,6 +80,14 @@ $(document).ready(function() {
             }
             wasTrueTouch = false;
         });
+
+
+        $('#text1').attr('href', 'https://system123.ru/demo1/');
+        $('#text2').attr('href', '../temporary_page1/index.html');
+        $('#text3').attr('href', '../temporary_page2/index.html');
+        $('#product1-number').attr('href', 'https://system123.ru/demo1/');
+        $('#product2-number').attr('href', '../temporary_page1/index.html');
+        $('#product3-number').attr('href', '../temporary_page2/index.html');
     }
     else {
         let clickStartX = 0;
