@@ -50,7 +50,7 @@ $(document).ready(function() {
     spin();
 
 
-    // Остановка кручение на нажатие.
+    // Обработка нажатий для кликов и тачей.
     if ($(window).width() <= 1000) {
         let touchStartTime = 0;
         const tapThresholdTime = 200;
@@ -87,8 +87,9 @@ $(document).ready(function() {
         let wasTrueClick = false;
         const slideThresholdDistance = 30;
 
-        $spinner.on('mousedown', function(event) { 
+        $spinner.on('mousedown', function(event) {
             if (!isDragging) {
+                console.log("mousedown on spinner")
                 clickStartX = event.clientX;
                 clickStartY = event.clientY;
                 wasTrueClick = true;
@@ -97,6 +98,7 @@ $(document).ready(function() {
 
         $spinner.on('mouseup', function(event) { 
             if (wasTrueClick) {
+                console.log("mouseup on spinner")
                 const distanceX = event.clientX - clickStartX;
                 const distanceY = event.clientY - clickStartY;
                 const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -106,5 +108,36 @@ $(document).ready(function() {
             }
             wasTrueClick = false;
         });
+
+
+        // Переход по ссылкам.
+        let clickStartX_ref = 0;
+        let clickStartY_ref = 0;
+        var clickedElementId = "";
+
+        $('.text').on('mousedown', function(event) {
+            clickedElementId = $(this).attr('id');
+            clickStartX_ref = event.clientX;
+            clickStartY_ref = event.clientY;
+        });
+
+        $('.text').on('mouseup', function(event) {
+            if (clickedElementId != "") {
+                const distanceX = event.clientX - clickStartX_ref;
+                const distanceY = event.clientY - clickStartY_ref;
+                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+                if (distance < slideThresholdDistance) {
+                    if (clickedElementId == "text1" || clickedElementId == "product1-number")
+                        window.location.href = 'https://system123.ru/demo1/';
+                    else if (clickedElementId == "text2" || clickedElementId == "product2-number")
+                        window.location.href = '../temporary_page1/index.html';
+                    else if (clickedElementId == "text3" || clickedElementId == "product3-number")
+                        window.location.href = '../temporary_page2/index.html';
+                    clickedElementId = "";
+                }
+            }
+        });
+
+
     }
 });

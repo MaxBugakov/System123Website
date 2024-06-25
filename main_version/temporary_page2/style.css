@@ -23,6 +23,7 @@ body {
     height: 100%;
     padding: 20px 0;
     max-height: 800px;
+    position: relative;
 }
 
 .main-wrapper > a {
