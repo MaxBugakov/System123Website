@@ -1,9 +1,10 @@
 $(document).ready(function () {
     const $spinner = $('.spinner');
     const $texts = $('.text');
+    const $emergingText = $('.emerging-text');
     let rotation = 0;
     let lastAngle = 0;
-    let velocity = 0;
+    let velocity = 3.5;
     let friction = 0.99; // Коэффициент трения для замедления движения спинера.
     let isDragging = false;
   
@@ -43,8 +44,7 @@ $(document).ready(function () {
     }
   
     function setOpacity() {
-      const $emergingText = $('.emerging-text');
-      let opacityVolume = clamp((velocity / 3), 0, 1)
+      let opacityVolume = clamp((Math.abs(velocity) / 3), 0, 1)
       $emergingText.css('opacity', opacityVolume);
     }
   
@@ -87,11 +87,12 @@ $(document).ready(function () {
           const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
           if (touchDuration < tapThresholdTime && distance < slideThresholdDistance) {
             velocity = 0;
+            $emergingText.css('opacity', 0);
           }
         }
         wasTrueTouch = false;
       });
-      
+
         $('#text1').attr('href', 'https://system123.ru/demo1/');
         $('#text2').attr('href', '../temporary_page1/index.html');
         $('#text3').attr('href', '../temporary_page2/index.html');
@@ -122,6 +123,7 @@ $(document).ready(function () {
                 const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
                 if (distance < slideThresholdDistance) {
                     velocity = 0;
+                    $emergingText.css('opacity', 0);
                 }
             }
             wasTrueClick = false;
