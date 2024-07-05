@@ -1,0 +1,197 @@
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  flex-direction: column;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px 0;
+  max-height: 800px;
+}
+
+.title {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+}
+.title h2 {
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+.title-top,
+.title-bottom {
+  background: linear-gradient(to right, #e224cc 0%, #55e6e3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.spinner {
+  width: 300px;
+  height: 300px;
+  background-image: url(static/art_spinner_img-transformed.png);
+  background-position: bottom 44px right 10px;
+  background-size: 93%;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  position: relative;
+}
+/* .spinner::before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(0, 255, 98);
+  top: 149px;
+}
+.spinner::after {
+  content: ' ';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: rgb(0, 255, 98);
+  left: 149px;
+} */
+
+.text {
+  position: absolute;
+  transform-origin: center center;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+  color: rgb(0, 0, 0);
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  text-decoration: none;
+}
+
+#text1 {
+  top: -67px;
+  left: 106px;
+}
+
+#text2 {
+  top: 225px;
+  left: 247px;
+}
+
+#text3 {
+  top: 227px;
+  left: -83px;
+}
+
+#product1-number,
+#product2-number,
+#product3-number {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 50%;
+  font-size: 50px;
+  font-weight: 600;
+}
+
+#product1-number {
+  top: 11px;
+  left: 105px;
+}
+
+#product2-number {
+  top: 152px;
+  left: 188px;
+}
+
+#product3-number {
+  top: 153px;
+  left: 23px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.var-logo {
+  width: 60px;
+  height: 20px;
+  position: absolute;
+  top: 140px;
+  left: 120px;
+  background-image: url(/static/var_logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
+
+.emerging-text {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 170px);
+  font-size: 70px;
+  text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    color: #fff6a9;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+  pointer-events: none;
+  margin: 0;
+  opacity: 0;
+}
+
+/* body {
+  padding: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #222;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 7px,
+    rgba(0, 0, 0, 0.8) 9px,
+    rgba(0, 0, 0, 0.8) 13px,
+    transparent 13px
+  );
+} */
+
+.footer__phone {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 40px;
+  text-align: center;
+}
+.footer__phone a {
+  text-decoration: none;
+  color: #bb1ca8;
+  white-space: nowrap;
+}

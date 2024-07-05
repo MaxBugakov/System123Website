@@ -1,87 +1,97 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const $spinner = $('.spinner');
     const $texts = $('.text');
     let rotation = 0;
     let lastAngle = 0;
-    let velocity = 0; // 3.5 
+    let velocity = 0;
     let friction = 0.99; // Коэффициент трения для замедления движения спинера.
     let isDragging = false;
-
+  
     // Закидываем логику кручения на спинер.
     interact('.spinner').draggable({
-        onstart: function(event) {
-            lastAngle = getAngle(event.pageX, event.pageY);
-            velocity = 0;
-            isDragging = true;
-        },
-        onmove: function(event) {
-            const angle = getAngle(event.pageX, event.pageY);
-            const delta = angle - lastAngle;
-            rotation += delta;
-            velocity = delta;
-            $spinner.css('transform', `rotate(${rotation}deg)`);
-            $texts.css('transform', `rotate(${-rotation}deg)`);
-            lastAngle = angle;
-        },
-        onend: function(event) {
-            isDragging = false;
-            spin();
-        }
-    });
-
-    // Поиск угла.
-    function getAngle(x, y) {
-        const rect = $spinner[0].getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
-    }
-
-    // Кручение.
-    function spin() {
-        rotation += velocity;
-        velocity *= friction;
+      onstart: function (event) {
+        lastAngle = getAngle(event.pageX, event.pageY);
+        velocity = 0;
+        isDragging = true;
+      },
+      onmove: function (event) {
+        const angle = getAngle(event.pageX, event.pageY);
+        const delta = angle - lastAngle;
+        rotation += delta;
+        velocity = delta;
         $spinner.css('transform', `rotate(${rotation}deg)`);
         $texts.css('transform', `rotate(${-rotation}deg)`);
-        if (Math.abs(velocity) > 0.05) {
-            requestAnimationFrame(spin);
-        }
+        lastAngle = angle;
+        setOpacity();
+      },
+      onend: function (event) {
+        isDragging = false;
+        spin();
+      },
+    });
+  
+    // Поиск угла.
+    function getAngle(x, y) {
+      const rect = $spinner[0].getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      return Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
+    }
+  
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+  
+    function setOpacity() {
+      const $emergingText = $('.emerging-text');
+      let opacityVolume = clamp((velocity / 3), 0, 1)
+      $emergingText.css('opacity', opacityVolume);
+    }
+  
+    // Кручение.
+    function spin() {
+      rotation += velocity;
+      velocity *= friction;
+      $spinner.css('transform', `rotate(${rotation}deg)`);
+      $texts.css('transform', `rotate(${-rotation}deg)`);
+      if (Math.abs(velocity) > 0.05) {
+        requestAnimationFrame(spin);
+        setOpacity();
+      }
     }
     spin();
-
-
+  
     // Обработка нажатий для кликов и тачей.
     if ($(window).width() <= 1000) {
-        let touchStartTime = 0;
-        const tapThresholdTime = 200;
-        const slideThresholdDistance = 30;
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let wasTrueTouch = false;
-
-        $spinner.on('touchstart', function(event) {
-            if (!isDragging) {
-                touchStartTime = Date.now();
-                touchStartX = event.touches[0].clientX;
-                touchStartY = event.touches[0].clientY;
-                wasTrueTouch = true;
-            }
-        });
-
-        $spinner.on('touchend', function(event) {
-            if (wasTrueTouch) {
-                const touchDuration = Date.now() - touchStartTime;
-                const distanceX = event.changedTouches[0].clientX - touchStartX;
-                const distanceY = event.changedTouches[0].clientY - touchStartY;
-                const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-                if (touchDuration < tapThresholdTime && distance < slideThresholdDistance) {
-                    velocity = 0;
-                }
-            }
-            wasTrueTouch = false;
-        });
-
-
+      let touchStartTime = 0;
+      const tapThresholdTime = 200;
+      const slideThresholdDistance = 30;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let wasTrueTouch = false;
+  
+      $spinner.on('touchstart', function (event) {
+        if (!isDragging) {
+          touchStartTime = Date.now();
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+          wasTrueTouch = true;
+        }
+      });
+  
+      $spinner.on('touchend', function (event) {
+        if (wasTrueTouch) {
+          const touchDuration = Date.now() - touchStartTime;
+          const distanceX = event.changedTouches[0].clientX - touchStartX;
+          const distanceY = event.changedTouches[0].clientY - touchStartY;
+          const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+          if (touchDuration < tapThresholdTime && distance < slideThresholdDistance) {
+            velocity = 0;
+          }
+        }
+        wasTrueTouch = false;
+      });
+      
         $('#text1').attr('href', 'https://system123.ru/demo1/');
         $('#text2').attr('href', '../temporary_page1/index.html');
         $('#text3').attr('href', '../temporary_page2/index.html');
